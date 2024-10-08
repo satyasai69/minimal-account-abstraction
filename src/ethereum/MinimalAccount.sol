@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
 import {IAccount} from "lib/account-abstraction/contracts/interfaces/IAccount.sol";
@@ -50,11 +50,13 @@ contract MinimalAccount is IAccount, Ownable {
         entryPoint = IEntryPoint(_enteryPoint);
     }
 
+    receive() external payable {}
+
     /*//////////////////////////////////////////////////////////////
                            EXTERNAL FUNCTIONS
     //////////////////////////////////////////////////////////////*/
 
-    function execute(address dec, uint256 val, bytes calldata functionData) external {
+    function execute(address dec, uint256 val, bytes calldata functionData) external requireFromEntryPointOrOwner {
         (bool success, bytes memory result) = dec.call{value: val}(functionData);
 
         if (!success) {
