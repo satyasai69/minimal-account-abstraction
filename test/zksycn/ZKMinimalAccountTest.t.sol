@@ -6,6 +6,9 @@ import {Transaction} from
     "lib/foundry-era-contracts/src/system-contracts/contracts/libraries/MemoryTransactionHelper.sol";
 
 contract ZkMinimalAccount is IAccount {
+    /*//////////////////////////////////////////////////////////////
+                           EXTERNAL FUNCTIONS
+    //////////////////////////////////////////////////////////////*/
     function validateTransaction(bytes32 _txHash, bytes32 _suggestedSignedHash, Transaction calldata _transaction)
         external
         payable
@@ -28,4 +31,7 @@ contract ZkMinimalAccount is IAccount {
         external
         payable
     {}
+    /*//////////////////////////////////////////////////////////////
+                           INTERNAL FUNCTIONS
+    //////////////////////////////////////////////////////////////*/
 }
